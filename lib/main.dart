@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:tecmarketplace/screens/login/login.dart';
 import 'screens/register/register_screen1.dart'; // Import registration screen
-import 'screens/login/login_screen.dart'; // Import login screen
+
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
