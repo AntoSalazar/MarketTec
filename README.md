@@ -75,20 +75,23 @@ and local commerce among peers, empowering student entrepreneurship.
 Are you a TecNM student and want to collaborate? You're more than welcome!  
 Feel free to fork this project, suggest improvements, or open issues.
 
----
+## 🧑‍💻 Authors
 
-## 🧑‍💻 Author
+Developed with ❤️ by students of the **Instituto Tecnológico de Tuxtla Gutiérrez**:
 
-**Developed by:** [Carlos Antonio Salazar Trinidad, Joaquin Aguilar Hernandez, Armando Hernandez Hernandez]  
-🎓 Students at Instituto Tecnológico de Tuxtla Gutiérrez  
-📧 Email: [L2270011@tuxtla.tecnm.mx] (Carlos Salazar)
-📧 Email: [L@tuxtla.tecnm.mx] (Joaquin Aguilar)
-📧 Email: [L22270037@tuxtla.tecnm.mx] (Joaquin Aguilar)
----
+- 👨‍💻 **Carlos Antonio Salazar Trinidad**  
+  📧 [L2270011@tuxtla.tecnm.mx](mailto:L2270011@tuxtla.tecnm.mx)
+
+- 👨‍💻 **Joaquín Aguilar Hernández**  
+  📧 [L@tuxtla.tecnm.mx](mailto:L@tuxtla.tecnm.mx)
+
+- 👨‍💻 **Armando Hernández Hernández**  
+  📧 [L22270037@tuxtla.tecnm.mx](mailto:L22270037@tuxtla.tecnm.mx)
+
+
 
 ## 📄 License
 
 This project is licensed under the MIT License.
 ```
 
----
