@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'email_verification_screen.dart'; // Asegúrate que la ruta sea correcta
+import 'email_verification_Screen.dart'; // Asegúrate que la ruta sea correcta
 
 class CareerDataScreen extends StatefulWidget {
   const CareerDataScreen({super.key});
@@ -141,27 +141,75 @@ class _CareerDataScreenState extends State<CareerDataScreen> {
       decoration: BoxDecoration(
         color: const Color(0xFFEFF1EC),
         borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: const Color(0xFFEFF1EC),
+          width: 2,
+        ),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 12),
+      // Add margin to ensure space for dropdown
+      margin: const EdgeInsets.only(bottom: 16),
       child: DropdownButtonFormField<String>(
         value: value,
         decoration: InputDecoration(
           labelText: label,
           labelStyle: TextStyle(color: Colors.black.withOpacity(0.6)),
           border: InputBorder.none,
+          contentPadding: const EdgeInsets.symmetric(vertical: 12),
         ),
-        dropdownColor: const Color(0xFFEFF1EC),
-        iconEnabledColor: const Color(0xFF1A2B22),
+        // Better styling for the dropdown menu
+        dropdownColor: const Color(0xFFFFFBF0),
+        iconEnabledColor: const Color(0xFF2E6144),
         style: const TextStyle(
           color: Color(0xFF1A2B22),
           fontSize: 16,
+          fontWeight: FontWeight.w500,
         ),
+        // Customize dropdown items
+        selectedItemBuilder: (BuildContext context) {
+          return items.map<Widget>((String item) {
+            return Container(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                item,
+                style: const TextStyle(
+                  color: Color(0xFF1A2B22),
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            );
+          }).toList();
+        },
+        // Customize menu items
         items: items.map((item) {
           return DropdownMenuItem<String>(
             value: item,
-            child: Text(item),
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              decoration: const BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    color: Color(0xFFEFF1EC),
+                    width: 1,
+                  ),
+                ),
+              ),
+              child: Text(
+                item,
+                style: const TextStyle(
+                  color: Color(0xFF1A2B22),
+                ),
+              ),
+            ),
           );
         }).toList(),
+        // Add dropdown styling
+        icon: const Icon(
+          Icons.arrow_drop_down_rounded,
+          size: 30,
+        ),
+        isExpanded: true,
+        elevation: 2,
         onChanged: onChanged,
       ),
     );
