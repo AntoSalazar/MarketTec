@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'career_data.dart'; // Asegúrate de tener este archivo
 
 class RegisterScreen1 extends StatefulWidget {
   const RegisterScreen1({super.key});
@@ -15,7 +16,7 @@ class _RegisterScreenState extends State<RegisterScreen1> {
 
   bool _obscurePassword = true;
   bool _obscureConfirmPassword = true;
-  bool _termsAccepted = false; // Added state variable for checkbox
+  bool _termsAccepted = false;
 
   @override
   void dispose() {
@@ -29,7 +30,7 @@ class _RegisterScreenState extends State<RegisterScreen1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFFFBF0), // Cream background
+      backgroundColor: const Color(0xFFFFFBF0),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -38,12 +39,8 @@ class _RegisterScreenState extends State<RegisterScreen1> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 20),
-
-
-
                 const SizedBox(height: 40),
 
-                // Register text
                 const Text(
                   'Crear cuenta',
                   style: TextStyle(
@@ -55,8 +52,6 @@ class _RegisterScreenState extends State<RegisterScreen1> {
                 ),
 
                 const SizedBox(height: 16),
-
-                // Subtitle
                 const Text(
                   'Registrate para comenzar',
                   style: TextStyle(
@@ -67,136 +62,56 @@ class _RegisterScreenState extends State<RegisterScreen1> {
 
                 const SizedBox(height: 40),
 
-                // Name field
-                Container(
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFEFF1EC),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: TextField(
-                    controller: _nameController,
-                    decoration: InputDecoration(
-                      hintText: 'Nombre completo',
-                      hintStyle: TextStyle(
-                        color: Colors.black.withOpacity(0.5),
-                      ),
-                      prefixIcon: Icon(
-                        Icons.person_outline,
-                        color: Colors.black.withOpacity(0.7),
-                      ),
-                      border: InputBorder.none,
-                      contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    ),
-                  ),
+                // Nombre
+                _buildInputField(
+                  controller: _nameController,
+                  hintText: 'Nombre completo',
+                  icon: Icons.person_outline,
                 ),
 
                 const SizedBox(height: 16),
 
-                // Email field
-                Container(
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFEFF1EC),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: TextField(
-                    controller: _emailController,
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(
-                      hintText: 'Email institucional',
-                      hintStyle: TextStyle(
-                        color: Colors.black.withOpacity(0.5),
-                      ),
-                      prefixIcon: Icon(
-                        Icons.email_outlined,
-                        color: Colors.black.withOpacity(0.7),
-                      ),
-                      border: InputBorder.none,
-                      contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    ),
-                  ),
+                // Email
+                _buildInputField(
+                  controller: _emailController,
+                  hintText: 'Email institucional',
+                  icon: Icons.email_outlined,
+                  keyboardType: TextInputType.emailAddress,
                 ),
 
                 const SizedBox(height: 16),
 
-                // Password field
-                Container(
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFEFF1EC),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: TextField(
-                    controller: _passwordController,
-                    obscureText: _obscurePassword,
-                    decoration: InputDecoration(
-                      hintText: 'Contraseña',
-                      hintStyle: TextStyle(
-                        color: Colors.black.withOpacity(0.5),
-                      ),
-                      prefixIcon: Icon(
-                        Icons.lock_outline,
-                        color: Colors.black.withOpacity(0.7),
-                      ),
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          _obscurePassword
-                              ? Icons.visibility_off_outlined
-                              : Icons.visibility_outlined,
-                          color: Colors.black.withOpacity(0.7),
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            _obscurePassword = !_obscurePassword;
-                          });
-                        },
-                      ),
-                      border: InputBorder.none,
-                      contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    ),
-                  ),
+                // Contraseña
+                _buildInputField(
+                  controller: _passwordController,
+                  hintText: 'Contraseña',
+                  icon: Icons.lock_outline,
+                  obscureText: _obscurePassword,
+                  toggleVisibility: () {
+                    setState(() {
+                      _obscurePassword = !_obscurePassword;
+                    });
+                  },
                 ),
 
                 const SizedBox(height: 16),
 
-                // Confirm Password field
-                Container(
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFEFF1EC),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: TextField(
-                    controller: _confirmPasswordController,
-                    obscureText: _obscureConfirmPassword,
-                    decoration: InputDecoration(
-                      hintText: 'Confirmar contraseña',
-                      hintStyle: TextStyle(
-                        color: Colors.black.withOpacity(0.5),
-                      ),
-                      prefixIcon: Icon(
-                        Icons.lock_outline,
-                        color: Colors.black.withOpacity(0.7),
-                      ),
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          _obscureConfirmPassword
-                              ? Icons.visibility_off_outlined
-                              : Icons.visibility_outlined,
-                          color: Colors.black.withOpacity(0.7),
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            _obscureConfirmPassword = !_obscureConfirmPassword;
-                          });
-                        },
-                      ),
-                      border: InputBorder.none,
-                      contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    ),
-                  ),
+                // Confirmar contraseña
+                _buildInputField(
+                  controller: _confirmPasswordController,
+                  hintText: 'Confirmar contraseña',
+                  icon: Icons.lock_outline,
+                  obscureText: _obscureConfirmPassword,
+                  toggleVisibility: () {
+                    setState(() {
+                      _obscureConfirmPassword = !_obscureConfirmPassword;
+                    });
+                  },
                 ),
 
                 const SizedBox(height: 20),
 
-                // Terms and conditions
+                // Aceptar términos
                 GestureDetector(
                   onTap: () {
                     setState(() {
@@ -242,25 +157,27 @@ class _RegisterScreenState extends State<RegisterScreen1> {
 
                 const SizedBox(height: 40),
 
-                // Register button
+                // Botón Crear cuenta
                 SizedBox(
                   width: double.infinity,
                   height: 56,
                   child: ElevatedButton(
                     onPressed: _termsAccepted
                         ? () {
-                      // Handle registration
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => CareerDataScreen()),
+                      );
                     }
-                        : null, // Disable button if terms not accepted
+                        : null,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF2E6144), // Dark green
+                      backgroundColor: const Color(0xFF2E6144),
                       foregroundColor: Colors.white,
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),
                       ),
                       disabledBackgroundColor:
-                      const Color(0xFF2E6144).withOpacity(0.5), // Faded green when disabled
+                      const Color(0xFF2E6144).withOpacity(0.5),
                     ),
                     child: const Text(
                       'Crear cuenta',
@@ -274,11 +191,9 @@ class _RegisterScreenState extends State<RegisterScreen1> {
 
                 const SizedBox(height: 30),
 
-                // Login link
                 Center(
                   child: GestureDetector(
                     onTap: () {
-                      // Navigate to login screen
                       Navigator.of(context).pushReplacementNamed('/login');
                     },
                     child: const Text(
@@ -295,6 +210,45 @@ class _RegisterScreenState extends State<RegisterScreen1> {
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildInputField({
+    required TextEditingController controller,
+    required String hintText,
+    required IconData icon,
+    TextInputType? keyboardType,
+    bool obscureText = false,
+    VoidCallback? toggleVisibility,
+  }) {
+    return Container(
+      decoration: BoxDecoration(
+        color: const Color(0xFFEFF1EC),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: TextField(
+        controller: controller,
+        keyboardType: keyboardType,
+        obscureText: obscureText,
+        decoration: InputDecoration(
+          hintText: hintText,
+          hintStyle: TextStyle(color: Colors.black.withOpacity(0.5)),
+          prefixIcon: Icon(icon, color: Colors.black.withOpacity(0.7)),
+          suffixIcon: toggleVisibility != null
+              ? IconButton(
+            icon: Icon(
+              obscureText
+                  ? Icons.visibility_off_outlined
+                  : Icons.visibility_outlined,
+              color: Colors.black.withOpacity(0.7),
+            ),
+            onPressed: toggleVisibility,
+          )
+              : null,
+          border: InputBorder.none,
+          contentPadding: const EdgeInsets.symmetric(vertical: 16),
         ),
       ),
     );
