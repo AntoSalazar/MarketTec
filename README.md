@@ -79,11 +79,11 @@ Feel free to fork this project, suggest improvements, or open issues.
 
 ## 🧑‍💻 Author
 
-**Developed by:** [Carlos Antonio Salazar Trinidad and Joaquin Aguilar Hernandez]  
+**Developed by:** [Carlos Antonio Salazar Trinidad, Joaquin Aguilar Hernandez, Armando Hernandez Hernandez]  
 🎓 Students at Instituto Tecnológico de Tuxtla Gutiérrez  
 📧 Email: [L2270011@tuxtla.tecnm.mx] (Carlos Salazar)
 📧 Email: [L@tuxtla.tecnm.mx] (Joaquin Aguilar)
-
+📧 Email: [L22270037@tuxtla.tecnm.mx] (Joaquin Aguilar)
 ---
 
 ## 📄 License
