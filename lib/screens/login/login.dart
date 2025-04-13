@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:tecmarketplace/screens/register/email_verification_Screen.dart';
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -148,7 +148,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 56,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Handle login
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const EmailVerificationScreen()),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF2E6144), // Dark green

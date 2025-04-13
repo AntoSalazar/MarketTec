@@ -7,7 +7,6 @@
 
 The goal is to provide a safe and trusted space where students can **buy, sell, or trade products and services** directly with fellow classmates.
 
----
 
 ## 🚀 Features
 
@@ -19,13 +18,13 @@ The goal is to provide a safe and trusted space where students can **buy, sell, 
 - 💬 In-app chat between users (**coming soon**)
 - 📸 Image upload for products
 
----
+
 
 ## 📷 Screenshots
 
 *still working on it*
 
----
+
 
 ## 🛠️ Tech Stack
 
@@ -33,7 +32,7 @@ The goal is to provide a safe and trusted space where students can **buy, sell, 
 - **Dart** – Programming language  
 - **NodeJS(Express & Typescript)** – Backend language
 
----
+
 
 ## 📲 Getting Started
 
@@ -54,21 +53,19 @@ The goal is to provide a safe and trusted space where students can **buy, sell, 
    flutter run
    ```
 
----
-
 ## 🎯 Purpose
 
 Design a digital platform exclusively for TecNM students to promote safe, fair, 
 and local commerce among peers, empowering student entrepreneurship.
 
----
+
 
 ## 📌 Project Status
 
 🔧 In development  
 📍 Initial release focused on Tec Tuxtla campus
 
----
+
 
 ## 🤝 Contributions
 
