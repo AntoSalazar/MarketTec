@@ -40,7 +40,7 @@ The goal is to provide a safe and trusted space where students can **buy, sell, 
 1. Clone the repository:
    ```bash
    git clone https://github.com/AntoSalazar/MarketTec
-   ```
+   
 2. Navigate into the project:
    ```bash
    cd market-tec
