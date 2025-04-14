@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: ProductPage(),
-  ));
-}
+
 
 class ProductPage extends StatefulWidget {
   const ProductPage({super.key});
@@ -133,7 +128,10 @@ class _ProductPageState extends State<ProductPage> {
                       icon: const Icon(Icons.add_circle, color: Colors.black),
                       onPressed: () {
                         setState(() {
-                          quantity++;
+
+                          if (quantity < 10) { // Set an appropriate maximum
+                                   quantity++;
+                               }
                         });
                       },
                     ),
