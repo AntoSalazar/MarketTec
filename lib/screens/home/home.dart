@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tecmarketplace/theme/app_constants.dart';
 import 'package:tecmarketplace/screens/home/home_content.dart';
 import 'package:tecmarketplace/screens/category/category.dart';
 import 'package:tecmarketplace/screens/account/account.dart';
@@ -31,11 +32,11 @@ class _HomeScreenState extends State<HomeScreen> {
     final isDark = theme.brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: isDark ? theme.scaffoldBackgroundColor : const Color(0xFFFFFBF0),
+      backgroundColor: isDark ? theme.scaffoldBackgroundColor : kLightBackgroundColor,
       body: _screens[_selectedIndex],
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
-          color: isDark ? theme.scaffoldBackgroundColor : const Color(0xFFFFFBF0),
+          color: isDark ? theme.scaffoldBackgroundColor : kLightBackgroundColor,
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.1),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tecmarketplace/theme/app_constants.dart';
 import 'package:tecmarketplace/screens/product_screen/product_screen.dart';
 import 'package:tecmarketplace/screens/search/search_screen.dart';
 import 'package:tecmarketplace/screens/favorites/favorites_screen.dart';
@@ -25,7 +26,7 @@ class _HomeContentState extends State<HomeContent> {
   @override
   void initState() {
     super.initState();
-    _pageController = PageController(viewportFraction: 0.98); // ancho completo
+    _pageController = PageController(viewportFraction: 0.98);
   }
 
   @override
@@ -36,9 +37,10 @@ class _HomeContentState extends State<HomeContent> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
     final textColor = isDark ? Colors.white : Colors.black;
-    final backgroundColor = Theme.of(context).scaffoldBackgroundColor;
+    final backgroundColor = isDark ? theme.scaffoldBackgroundColor : kLightBackgroundColor;
 
     final List<Map<String, String>> categories = [
       {'title': 'Electrónica', 'image': 'assets/images/electronica.jpg'},
@@ -139,8 +141,10 @@ class _HomeContentState extends State<HomeContent> {
         children: [
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Text('Categorías destacadas',
-                style: TextStyle(color: textColor, fontSize: 20, fontWeight: FontWeight.bold)),
+            child: Text(
+              'Categorías destacadas',
+              style: TextStyle(color: textColor, fontSize: 20, fontWeight: FontWeight.bold),
+            ),
           ),
           SizedBox(
             height: 170,
@@ -160,12 +164,15 @@ class _HomeContentState extends State<HomeContent> {
                         Positioned(
                           bottom: 10,
                           left: 10,
-                          child: Text(category['title']!,
-                              style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  shadows: [Shadow(blurRadius: 8, color: Colors.black)])),
+                          child: Text(
+                            category['title']!,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              shadows: [Shadow(blurRadius: 8, color: Colors.black)],
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -177,8 +184,10 @@ class _HomeContentState extends State<HomeContent> {
           const SizedBox(height: 24),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Text('Tendencias',
-                style: TextStyle(color: textColor, fontSize: 20, fontWeight: FontWeight.bold)),
+            child: Text(
+              'Tendencias',
+              style: TextStyle(color: textColor, fontSize: 20, fontWeight: FontWeight.bold),
+            ),
           ),
           const SizedBox(height: 17),
           SizedBox(
@@ -266,8 +275,10 @@ class _HomeContentState extends State<HomeContent> {
                                     children: [
                                       const Icon(Icons.star, color: Colors.amber, size: 16),
                                       const SizedBox(width: 4),
-                                      Text("${product['rating']} (${product['reviews']})",
-                                          style: TextStyle(color: textColor.withOpacity(0.6), fontSize: 12)),
+                                      Text(
+                                        "${product['rating']} (${product['reviews']})",
+                                        style: TextStyle(color: textColor.withOpacity(0.6), fontSize: 12),
+                                      ),
                                     ],
                                   ),
                                   if (product['discount'])

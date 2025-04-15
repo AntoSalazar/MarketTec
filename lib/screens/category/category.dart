@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tecmarketplace/theme/app_constants.dart'; // Asegúrate que esta ruta esté bien
 
 class CategoryScreen extends StatelessWidget {
   const CategoryScreen({super.key});
@@ -10,9 +11,9 @@ class CategoryScreen extends StatelessWidget {
     final textColor = theme.textTheme.bodyMedium?.color;
 
     return Scaffold(
-      backgroundColor: isDark ? theme.scaffoldBackgroundColor : const Color(0xFFFFFBF0),
+      backgroundColor: isDark ? theme.scaffoldBackgroundColor : kLightBackgroundColor,
       appBar: AppBar(
-        backgroundColor: isDark ? theme.scaffoldBackgroundColor : const Color(0xFFFFFBF0),
+        backgroundColor: isDark ? theme.scaffoldBackgroundColor : kLightBackgroundColor,
         elevation: 2,
         shadowColor: Colors.black.withOpacity(0.1),
         surfaceTintColor: Colors.transparent,
