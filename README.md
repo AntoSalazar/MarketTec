@@ -1,15 +1,14 @@
+# 🛍️ MarketTec
 
+**Marketplace for TecNM Students**
 
-```markdown
-# 🛍️ MarketTec - Marketplace for TecNM Students
-
-**MarketTec** is a mobile marketplace app designed exclusively for students of the **Tecnológico Nacional de México (TecNM)**, starting with the community at **Instituto Tecnológico de Tuxtla Gutiérrez**.
-
-The goal is to provide a safe and trusted space where students can **buy, sell, or trade products and services** directly with fellow classmates.
+> A mobile app designed exclusively for students of the **Tecnológico Nacional de México (TecNM)** — starting with the community at **Instituto Tecnológico de Tuxtla Gutiérrez** — to **buy, sell, and trade** products and services in a safe and student-verified environment.
 
 ---
 
 ## 🚀 Features
+
+Key functionalities included in the first release:
 
 - 📱 Mobile application built with **Flutter**
 - 📦 Product and service listings
@@ -23,7 +22,7 @@ The goal is to provide a safe and trusted space where students can **buy, sell, 
 
 ## 📷 Screenshots
 
-*still working on it*
+*Coming soon...*
 
 ---
 
@@ -31,25 +30,30 @@ The goal is to provide a safe and trusted space where students can **buy, sell, 
 
 - **Flutter** – Main framework for mobile development  
 - **Dart** – Programming language  
-- **NodeJS(Express & Typescript)** – Backend language
+- **Node.js (Express & TypeScript)** – Backend and API development
 
 ---
 
 ## 📲 Getting Started
 
-1. Clone the repository:
+To run the project locally, follow these steps:
+
+1. **Clone the repository**
    ```bash
    git clone https://github.com/AntoSalazar/MarketTec
    ```
-2. Navigate into the project:
+
+2. **Navigate into the project**
    ```bash
    cd market-tec
    ```
-3. Install dependencies:
+
+3. **Install dependencies**
    ```bash
    flutter pub get
    ```
-4. Run the app:
+
+4. **Run the app**
    ```bash
    flutter run
    ```
@@ -58,40 +62,48 @@ The goal is to provide a safe and trusted space where students can **buy, sell, 
 
 ## 🎯 Purpose
 
-Design a digital platform exclusively for TecNM students to promote safe, fair, 
-and local commerce among peers, empowering student entrepreneurship.
+The purpose of this app is to:
+- Create a digital marketplace exclusively for TecNM students
+- Encourage safe, fair, and local commerce
+- Empower student entrepreneurship and collaboration
 
 ---
 
 ## 📌 Project Status
-
-🔧 In development  
-📍 Initial release focused on Tec Tuxtla campus
+- 🔧 Currently in development
+- 📍 Initial release focused on Tec Tuxtla campus
 
 ---
 
 ## 🤝 Contributions
 
-Are you a TecNM student and want to collaborate? You're more than welcome!  
-Feel free to fork this project, suggest improvements, or open issues.
+Are you a TecNM student and want to collaborate?  
+You're more than welcome! Feel free to:
+- Fork this project
+- Suggest improvements
+- Open issues
+- Submit pull requests
+
+---
 
 ## 🧑‍💻 Authors
 
-Developed with ❤️ by students of the **Instituto Tecnológico de Tuxtla Gutiérrez**:
+Developed with ❤️ by students of the Instituto Tecnológico de Tuxtla Gutiérrez:
 
 - 👨‍💻 **Carlos Antonio Salazar Trinidad**  
-  📧 [L2270011@tuxtla.tecnm.mx](mailto:L2270011@tuxtla.tecnm.mx)
+  📧 L2270011@tuxtla.tecnm.mx
 
 - 👨‍💻 **Joaquín Aguilar Hernández**  
-  📧 [L@tuxtla.tecnm.mx](mailto:L@tuxtla.tecnm.mx)
+  📧 L21270623@tuxtla.tecnm.mx
 
 - 👨‍💻 **Armando Hernández Hernández**  
-  📧 [L22270037@tuxtla.tecnm.mx](mailto:L22270037@tuxtla.tecnm.mx)
+  📧 L22270037@tuxtla.tecnm.mx
 
+- 👨‍💻 **Jesús Javier Jiménez Gutiérrez**  
+  📧 L21270641@tuxtla.tecnm.mx
 
+---
 
 ## 📄 License
 
 This project is licensed under the MIT License.
-```
-
