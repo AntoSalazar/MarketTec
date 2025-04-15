@@ -4,20 +4,47 @@ import 'package:tecmarketplace/screens/search/search_screen.dart';
 import 'package:tecmarketplace/screens/favorites/favorites_screen.dart';
 import 'package:tecmarketplace/screens/cart/cart_screen.dart';
 
-class HomeContent extends StatelessWidget {
+class HomeContent extends StatefulWidget {
   const HomeContent({super.key});
 
   @override
+  State<HomeContent> createState() => _HomeContentState();
+}
+
+class _HomeContentState extends State<HomeContent> {
+  final Set<int> _favoriteIndexes = {};
+  late final PageController _pageController;
+
+  final List<String> tendenciasImages = [
+    'assets/images/halo5.jpg',
+    'assets/images/tendencias.jpg',
+    'assets/images/spotify.jpg',
+    'assets/images/titan.jpg',
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController(viewportFraction: 0.98); // ancho completo
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
-    final textColor = theme.textTheme.bodyMedium?.color;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final textColor = isDark ? Colors.white : Colors.black;
+    final backgroundColor = Theme.of(context).scaffoldBackgroundColor;
 
     final List<Map<String, String>> categories = [
-      {'title': 'Electrónica', 'count': '1200+'},
-      {'title': 'Moda', 'count': '950+'},
-      {'title': 'Hogar y Jardín', 'count': '820+'},
-      {'title': 'Salud y Belleza', 'count': '750+'},
+      {'title': 'Electrónica', 'image': 'assets/images/electronica.jpg'},
+      {'title': 'Moda', 'image': 'assets/images/moda.jpg'},
+      {'title': 'Hogar y Jardín', 'image': 'assets/images/hogar_jardin.jpg'},
+      {'title': 'Salud y Belleza', 'image': 'assets/images/categoria4.jpg'},
     ];
 
     final List<Map<String, dynamic>> products = [
@@ -27,242 +54,265 @@ class HomeContent extends StatelessWidget {
         'discount': false,
         'category': 'Electrónica',
         'rating': 4.0,
-        'reviews': 24
+        'reviews': 24,
+        'image': 'assets/images/Banderillas.jpg',
       },
       {
         'name': 'Producto 2',
         'price': '\$59.99',
-        'discount': false,
+        'discount': true,
         'category': 'Moda',
         'rating': 4.5,
-        'reviews': 18
+        'reviews': 18,
+        'image': 'assets/images/Banderillas3.jpg',
       },
       {
         'name': 'Producto 3',
-        'price': '\$59.99',
-        'discount': true,
-        'category': 'Hogar',
-        'rating': 3.5,
-        'reviews': 32
+        'price': '\$39.99',
+        'discount': false,
+        'category': 'Hogar y Jardín',
+        'rating': 3.8,
+        'reviews': 10,
+        'image': 'assets/images/spotify.jpg',
       },
       {
         'name': 'Producto 4',
-        'price': '\$59.99',
+        'price': '\$99.99',
+        'discount': true,
+        'category': 'Electrónica',
+        'rating': 4.9,
+        'reviews': 45,
+        'image': 'assets/images/brownies.jpg',
+      },
+      {
+        'name': 'Producto 5',
+        'price': '\$24.99',
         'discount': false,
-        'category': 'Salud',
-        'rating': 5.0,
-        'reviews': 7
+        'category': 'Salud y Belleza',
+        'rating': 4.2,
+        'reviews': 15,
+        'image': 'assets/images/youtube.jpg',
       },
     ];
 
     return Scaffold(
-      backgroundColor: isDark ? theme.scaffoldBackgroundColor : theme.colorScheme.background,
+      backgroundColor: backgroundColor,
       appBar: AppBar(
-        backgroundColor: isDark ? theme.scaffoldBackgroundColor : theme.colorScheme.background,
-        elevation: 2.5,
-        shadowColor: Colors.black.withOpacity(0.15),
-        surfaceTintColor: Colors.transparent,
+        backgroundColor: backgroundColor,
+        elevation: 0,
         title: GestureDetector(
           onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => const SearchScreen()),
-            );
+            Navigator.push(context, MaterialPageRoute(builder: (_) => const SearchScreen()));
           },
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             height: 40,
             decoration: BoxDecoration(
-              color: theme.inputDecorationTheme.fillColor,
+              color: isDark ? Colors.grey[900] : Colors.grey[200],
               borderRadius: BorderRadius.circular(12),
             ),
             alignment: Alignment.centerLeft,
             child: Text(
-              '¿Qué estás buscando?',
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: isDark ? Colors.grey[400] : Colors.grey[700],
-                fontSize: 14,
-              ),
+              'Buscar productos...',
+              style: TextStyle(color: isDark ? Colors.white70 : Colors.black54, fontSize: 14),
             ),
           ),
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.favorite_border, color: theme.iconTheme.color),
+            icon: const Icon(Icons.favorite_border),
+            color: Colors.red,
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => const FavoritesScreen()),
-              );
+              Navigator.push(context, MaterialPageRoute(builder: (_) => const FavoritesScreen()));
             },
           ),
           IconButton(
-            icon: Icon(Icons.shopping_cart_outlined, color: theme.iconTheme.color),
+            icon: const Icon(Icons.shopping_cart_outlined),
+            color: textColor,
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => const CartScreen()),
-              );
+              Navigator.push(context, MaterialPageRoute(builder: (_) => const CartScreen()));
             },
           ),
         ],
       ),
       body: ListView(
-        padding: const EdgeInsets.all(16),
         children: [
-          Text(
-            "Categorías populares",
-            style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold, color: textColor),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text('Categorías destacadas',
+                style: TextStyle(color: textColor, fontSize: 20, fontWeight: FontWeight.bold)),
           ),
-          const SizedBox(height: 12),
-          GridView.count(
-            crossAxisCount: 2,
-            mainAxisSpacing: 12,
-            crossAxisSpacing: 12,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            children: categories.map((category) => CategoryCard(
-              title: category['title']!,
-              articleCount: category['count']!,
-            )).toList(),
+          SizedBox(
+            height: 170,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              itemCount: categories.length,
+              itemBuilder: (context, index) {
+                final category = categories[index];
+                return Padding(
+                  padding: const EdgeInsets.only(right: 12),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child: Stack(
+                      children: [
+                        Image.asset(category['image']!, width: 240, fit: BoxFit.cover),
+                        Positioned(
+                          bottom: 10,
+                          left: 10,
+                          child: Text(category['title']!,
+                              style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  shadows: [Shadow(blurRadius: 8, color: Colors.black)])),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
           ),
           const SizedBox(height: 24),
-          Text(
-            "Tendencias actuales",
-            style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold, color: textColor),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text('Tendencias',
+                style: TextStyle(color: textColor, fontSize: 20, fontWeight: FontWeight.bold)),
+          ),
+          const SizedBox(height: 17),
+          SizedBox(
+            height: 200,
+            child: PageView.builder(
+              controller: _pageController,
+              itemCount: tendenciasImages.length,
+              itemBuilder: (context, index) {
+                return AnimatedBuilder(
+                  animation: _pageController,
+                  builder: (context, child) {
+                    double value = 1.0;
+                    if (_pageController.position.haveDimensions) {
+                      value = (_pageController.page! - index).abs();
+                      value = (1 - (value * 0.2)).clamp(0.9, 1.0);
+                    }
+                    return Transform.scale(
+                      scale: Curves.easeOut.transform(value),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(19),
+                          child: Image.asset(
+                            tendenciasImages[index],
+                            fit: BoxFit.cover,
+                            width: double.infinity,
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
           ),
           const SizedBox(height: 12),
-          GridView.count(
-            crossAxisCount: 2,
-            mainAxisSpacing: 12,
-            crossAxisSpacing: 12,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            children: products.map((product) => ProductCard(
-              name: product['name'],
-              price: product['price'],
-              category: product['category'],
-              rating: product['rating'],
-              reviews: product['reviews'],
-              discount: product['discount'],
-              onFavoriteToggle: () {},
-            )).toList(),
-          )
+          Column(
+            children: products.asMap().entries.map((entry) {
+              final index = entry.key;
+              final product = entry.value;
+              final isFavorite = _favoriteIndexes.contains(index);
+
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => ProductPage(productName: product['name'])),
+                  );
+                },
+                child: Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  decoration: BoxDecoration(
+                    color: isDark ? Colors.grey[900] : Colors.grey[200],
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Stack(
+                    children: [
+                      Row(
+                        children: [
+                          ClipRRect(
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(16),
+                              bottomLeft: Radius.circular(16),
+                            ),
+                            child: Image.asset(
+                              product['image'],
+                              height: 120,
+                              width: 120,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(product['name'],
+                                      style: TextStyle(color: textColor, fontWeight: FontWeight.bold)),
+                                  const SizedBox(height: 4),
+                                  Text(product['price'],
+                                      style: TextStyle(color: textColor.withOpacity(0.7), fontSize: 14)),
+                                  const SizedBox(height: 4),
+                                  Row(
+                                    children: [
+                                      const Icon(Icons.star, color: Colors.amber, size: 16),
+                                      const SizedBox(width: 4),
+                                      Text("${product['rating']} (${product['reviews']})",
+                                          style: TextStyle(color: textColor.withOpacity(0.6), fontSize: 12)),
+                                    ],
+                                  ),
+                                  if (product['discount'])
+                                    Container(
+                                      margin: const EdgeInsets.only(top: 6),
+                                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                                      decoration: BoxDecoration(
+                                        color: Colors.red,
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+                                      child: const Text('Descuento',
+                                          style: TextStyle(color: Colors.white, fontSize: 10)),
+                                    ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Positioned(
+                        top: 8,
+                        right: 8,
+                        child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              if (isFavorite) {
+                                _favoriteIndexes.remove(index);
+                              } else {
+                                _favoriteIndexes.add(index);
+                              }
+                            });
+                          },
+                          child: Icon(
+                            isFavorite ? Icons.favorite : Icons.favorite_border,
+                            color: isFavorite ? Colors.red : Colors.red,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
         ],
-      ),
-    );
-  }
-}
-
-class CategoryCard extends StatelessWidget {
-  final String title;
-  final String articleCount;
-  const CategoryCard({super.key, required this.title, required this.articleCount});
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final textColor = theme.textTheme.bodyMedium?.color;
-    return Container(
-      decoration: BoxDecoration(
-        color: theme.cardColor,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      padding: const EdgeInsets.all(12),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(title, style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold, color: textColor)),
-          Text("$articleCount artículos", style: theme.textTheme.bodySmall?.copyWith(color: Colors.grey)),
-        ],
-      ),
-    );
-  }
-}
-
-class ProductCard extends StatelessWidget {
-  final String name;
-  final String price;
-  final bool discount;
-  final String category;
-  final double rating;
-  final int reviews;
-  final VoidCallback? onFavoriteToggle;
-  const ProductCard({
-    super.key,
-    required this.name,
-    required this.price,
-    this.discount = false,
-    this.category = 'Categoría',
-    this.rating = 4.0,
-    this.reviews = 24,
-    this.onFavoriteToggle,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final textColor = theme.textTheme.bodyMedium?.color;
-
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => ProductPage(productName: name)),
-        );
-      },
-      child: Container(
-        decoration: BoxDecoration(
-          color: theme.cardColor,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: theme.dividerColor),
-        ),
-        padding: const EdgeInsets.all(12),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Align(
-              alignment: Alignment.topRight,
-              child: GestureDetector(
-                onTap: onFavoriteToggle,
-                child: Icon(
-                  Icons.favorite_border,
-                  size: 20,
-                  color: Colors.grey.shade600,
-                  semanticLabel: 'Toggle favorite',
-                ),
-              ),
-            ),
-            if (discount)
-              Container(
-                margin: const EdgeInsets.only(top: 4),
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                decoration: BoxDecoration(
-                  color: Colors.red,
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                child: const Text(
-                  'Oferta',
-                  style: TextStyle(color: Colors.white, fontSize: 10),
-                ),
-              ),
-            const Spacer(),
-            Text(category, style: theme.textTheme.bodySmall?.copyWith(color: Colors.grey)),
-            Text(name, style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold, color: textColor)),
-            Text(price, style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600, color: textColor)),
-            Row(
-              children: [
-                const Icon(Icons.star, color: Colors.amber, size: 16),
-                const SizedBox(width: 4),
-                Text(
-                  "$rating ($reviews)",
-                  style: const TextStyle(fontSize: 12, color: Colors.grey),
-                ),
-              ],
-            )
-          ],
-        ),
       ),
     );
   }
