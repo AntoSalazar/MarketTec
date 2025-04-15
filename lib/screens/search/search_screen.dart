@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tecmarketplace/screens/product_screen/product_screen.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -88,7 +89,15 @@ class _SearchScreenState extends State<SearchScreen> {
           itemBuilder: (context, index) {
             return ListTile(
               title: Text(_filteredItems[index], style: theme.textTheme.bodyMedium),
-              onTap: () {},
+              onTap: () {
+                // Navigate to product details
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ProductPage(productName: _filteredItems[index]),
+                  ),
+                );
+              },
             );
           },
         ),

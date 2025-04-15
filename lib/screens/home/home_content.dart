@@ -13,10 +13,52 @@ class HomeContent extends StatelessWidget {
     final isDark = theme.brightness == Brightness.dark;
     final textColor = theme.textTheme.bodyMedium?.color;
 
+    final List<Map<String, String>> categories = [
+      {'title': 'Electrónica', 'count': '1200+'},
+      {'title': 'Moda', 'count': '950+'},
+      {'title': 'Hogar y Jardín', 'count': '820+'},
+      {'title': 'Salud y Belleza', 'count': '750+'},
+    ];
+
+    final List<Map<String, dynamic>> products = [
+      {
+        'name': 'Producto 1',
+        'price': '\$59.99',
+        'discount': false,
+        'category': 'Electrónica',
+        'rating': 4.0,
+        'reviews': 24
+      },
+      {
+        'name': 'Producto 2',
+        'price': '\$59.99',
+        'discount': false,
+        'category': 'Moda',
+        'rating': 4.5,
+        'reviews': 18
+      },
+      {
+        'name': 'Producto 3',
+        'price': '\$59.99',
+        'discount': true,
+        'category': 'Hogar',
+        'rating': 3.5,
+        'reviews': 32
+      },
+      {
+        'name': 'Producto 4',
+        'price': '\$59.99',
+        'discount': false,
+        'category': 'Salud',
+        'rating': 5.0,
+        'reviews': 7
+      },
+    ];
+
     return Scaffold(
-      backgroundColor: isDark ? theme.scaffoldBackgroundColor : const Color(0xFFFFFBF0),
+      backgroundColor: isDark ? theme.scaffoldBackgroundColor : theme.colorScheme.background,
       appBar: AppBar(
-        backgroundColor: isDark ? theme.scaffoldBackgroundColor : const Color(0xFFFFFBF0),
+        backgroundColor: isDark ? theme.scaffoldBackgroundColor : theme.colorScheme.background,
         elevation: 2.5,
         shadowColor: Colors.black.withOpacity(0.15),
         surfaceTintColor: Colors.transparent,
@@ -79,12 +121,10 @@ class HomeContent extends StatelessWidget {
             crossAxisSpacing: 12,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            children: const [
-              CategoryCard(title: 'Electrónica'),
-              CategoryCard(title: 'Moda'),
-              CategoryCard(title: 'Hogar y Jardín'),
-              CategoryCard(title: 'Salud y Belleza'),
-            ],
+            children: categories.map((category) => CategoryCard(
+              title: category['title']!,
+              articleCount: category['count']!,
+            )).toList(),
           ),
           const SizedBox(height: 24),
           Text(
@@ -98,12 +138,15 @@ class HomeContent extends StatelessWidget {
             crossAxisSpacing: 12,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            children: [
-              ProductCard(name: 'Producto 1', price: '\$59.99'),
-              ProductCard(name: 'Producto 2', price: '\$59.99'),
-              ProductCard(name: 'Producto 3', price: '\$59.99', discount: true),
-              ProductCard(name: 'Producto 4', price: '\$59.99'),
-            ],
+            children: products.map((product) => ProductCard(
+              name: product['name'],
+              price: product['price'],
+              category: product['category'],
+              rating: product['rating'],
+              reviews: product['reviews'],
+              discount: product['discount'],
+              onFavoriteToggle: () {},
+            )).toList(),
           )
         ],
       ),
@@ -113,7 +156,8 @@ class HomeContent extends StatelessWidget {
 
 class CategoryCard extends StatelessWidget {
   final String title;
-  const CategoryCard({super.key, required this.title});
+  final String articleCount;
+  const CategoryCard({super.key, required this.title, required this.articleCount});
 
   @override
   Widget build(BuildContext context) {
@@ -130,7 +174,7 @@ class CategoryCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(title, style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold, color: textColor)),
-          Text("1200+ artículos", style: theme.textTheme.bodySmall?.copyWith(color: Colors.grey)),
+          Text("$articleCount artículos", style: theme.textTheme.bodySmall?.copyWith(color: Colors.grey)),
         ],
       ),
     );
@@ -141,7 +185,20 @@ class ProductCard extends StatelessWidget {
   final String name;
   final String price;
   final bool discount;
-  const ProductCard({super.key, required this.name, required this.price, this.discount = false});
+  final String category;
+  final double rating;
+  final int reviews;
+  final VoidCallback? onFavoriteToggle;
+  const ProductCard({
+    super.key,
+    required this.name,
+    required this.price,
+    this.discount = false,
+    this.category = 'Categoría',
+    this.rating = 4.0,
+    this.reviews = 24,
+    this.onFavoriteToggle,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -150,7 +207,10 @@ class ProductCard extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (_) => const ProductPage()));
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => ProductPage(productName: name)),
+        );
       },
       child: Container(
         decoration: BoxDecoration(
@@ -164,17 +224,41 @@ class ProductCard extends StatelessWidget {
           children: [
             Align(
               alignment: Alignment.topRight,
-              child: Icon(Icons.favorite_border, size: 20, color: Colors.grey.shade600),
+              child: GestureDetector(
+                onTap: onFavoriteToggle,
+                child: Icon(
+                  Icons.favorite_border,
+                  size: 20,
+                  color: Colors.grey.shade600,
+                  semanticLabel: 'Toggle favorite',
+                ),
+              ),
             ),
+            if (discount)
+              Container(
+                margin: const EdgeInsets.only(top: 4),
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                decoration: BoxDecoration(
+                  color: Colors.red,
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: const Text(
+                  'Oferta',
+                  style: TextStyle(color: Colors.white, fontSize: 10),
+                ),
+              ),
             const Spacer(),
-            Text("Categoría", style: theme.textTheme.bodySmall?.copyWith(color: Colors.grey)),
+            Text(category, style: theme.textTheme.bodySmall?.copyWith(color: Colors.grey)),
             Text(name, style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold, color: textColor)),
             Text(price, style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600, color: textColor)),
             Row(
-              children: const [
-                Icon(Icons.star, color: Colors.amber, size: 16),
-                SizedBox(width: 4),
-                Text("4.0 (24)", style: TextStyle(fontSize: 12, color: Colors.grey))
+              children: [
+                const Icon(Icons.star, color: Colors.amber, size: 16),
+                const SizedBox(width: 4),
+                Text(
+                  "$rating ($reviews)",
+                  style: const TextStyle(fontSize: 12, color: Colors.grey),
+                ),
               ],
             )
           ],

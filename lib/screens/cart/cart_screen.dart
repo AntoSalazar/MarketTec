@@ -36,7 +36,20 @@ class CartScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              child: ListView.builder(
+              child: cartItems.isEmpty
+                  ? Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.shopping_cart_outlined, size: 48, color: Colors.grey),
+                    const SizedBox(height: 16),
+                    Text('Tu carrito está vacío', style: theme.textTheme.titleMedium),
+                    const SizedBox(height: 8),
+                    Text('Agrega productos para comenzar a comprar', style: theme.textTheme.bodyMedium),
+                  ],
+                ),
+              )
+                  : ListView.builder(
                 itemCount: cartItems.length,
                 itemBuilder: (context, index) {
                   final item = cartItems[index];

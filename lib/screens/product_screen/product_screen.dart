@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ProductPage extends StatefulWidget {
-  const ProductPage({super.key});
+  final String productName;
+
+  const ProductPage({super.key, required this.productName});
 
   @override
   State<ProductPage> createState() => _ProductPageState();
@@ -19,7 +21,7 @@ class _ProductPageState extends State<ProductPage> {
 
   void addToCart() {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Banderillas se agregó al carrito')),
+      SnackBar(content: Text('${widget.productName} se agregó al carrito')),
     );
   }
 
@@ -34,7 +36,7 @@ class _ProductPageState extends State<ProductPage> {
       backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
         backgroundColor: theme.appBarTheme.backgroundColor,
-        title: Text('Detalles del Producto', style: theme.appBarTheme.titleTextStyle),
+        title: Text(widget.productName, style: theme.appBarTheme.titleTextStyle),
         centerTitle: true,
         iconTheme: theme.appBarTheme.iconTheme,
         elevation: 1,
@@ -83,7 +85,7 @@ class _ProductPageState extends State<ProductPage> {
               }),
             ),
             const SizedBox(height: 16),
-            Text('Banderillas', style: theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold)),
+            Text(widget.productName, style: theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             Row(
               children: [
