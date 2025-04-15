@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-
-
 class ProductPage extends StatefulWidget {
-  const ProductPage({super.key});
+  final String productName;
+
+  const ProductPage({super.key, required this.productName});
 
   @override
   State<ProductPage> createState() => _ProductPageState();
@@ -21,19 +21,24 @@ class _ProductPageState extends State<ProductPage> {
 
   void addToCart() {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Banderillas se agregó al carrito')),
+      SnackBar(content: Text('${widget.productName} se agregó al carrito')),
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final textColor = theme.textTheme.bodyMedium?.color;
+    final cardColor = theme.cardColor;
+    final isDark = theme.brightness == Brightness.dark;
+
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: const Text('Detalles del Producto', style: TextStyle(color: Colors.black)),
+        backgroundColor: theme.appBarTheme.backgroundColor,
+        title: Text(widget.productName, style: theme.appBarTheme.titleTextStyle),
         centerTitle: true,
-        iconTheme: const IconThemeData(color: Colors.black),
+        iconTheme: theme.appBarTheme.iconTheme,
         elevation: 1,
       ),
       body: SingleChildScrollView(
@@ -72,40 +77,33 @@ class _ProductPageState extends State<ProductPage> {
                   height: 8,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: _currentImage == index ? Colors.black : Colors.black26,
+                    color: _currentImage == index
+                        ? theme.colorScheme.primary
+                        : Colors.grey,
                   ),
                 );
               }),
             ),
             const SizedBox(height: 16),
-            const Text(
-              'Banderillas',
-              style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold, color: Colors.black),
-            ),
+            Text(widget.productName, style: theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             Row(
-              children: const [
-                CircleAvatar(
+              children: [
+                const CircleAvatar(
                   backgroundImage: AssetImage('assets/images/vendedor_avatar.png'),
                   radius: 16,
                 ),
-                SizedBox(width: 8),
-                Text(
-                  'James Hernández',
-                  style: TextStyle(color: Colors.black87),
-                ),
+                const SizedBox(width: 8),
+                Text('James Hernández', style: theme.textTheme.bodyMedium),
               ],
             ),
             const SizedBox(height: 8),
-            const Text(
+            Text(
               'Carrera: Ingeniería en Sistemas Computacionales\nSemestre: Séptimo\nTurno: Matutino',
-              style: TextStyle(color: Colors.black54, fontSize: 14),
+              style: theme.textTheme.bodySmall?.copyWith(color: Colors.grey),
             ),
             const SizedBox(height: 16),
-            const Text(
-              'Precio: \$25.00 MXN',
-              style: TextStyle(fontSize: 20, color: Colors.black),
-            ),
+            Text('Precio: \$25.00 MXN', style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
             const SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -113,25 +111,19 @@ class _ProductPageState extends State<ProductPage> {
                 Row(
                   children: [
                     IconButton(
-                      icon: const Icon(Icons.remove_circle, color: Colors.black),
+                      icon: Icon(Icons.remove_circle, color: theme.iconTheme.color),
                       onPressed: () {
                         setState(() {
                           if (quantity > 1) quantity--;
                         });
                       },
                     ),
-                    Text(
-                      '$quantity',
-                      style: const TextStyle(fontSize: 20, color: Colors.black),
-                    ),
+                    Text('$quantity', style: theme.textTheme.titleMedium),
                     IconButton(
-                      icon: const Icon(Icons.add_circle, color: Colors.black),
+                      icon: Icon(Icons.add_circle, color: theme.iconTheme.color),
                       onPressed: () {
                         setState(() {
-
-                          if (quantity < 10) { // Set an appropriate maximum
-                                   quantity++;
-                               }
+                          if (quantity < 10) quantity++;
                         });
                       },
                     ),
@@ -151,14 +143,11 @@ class _ProductPageState extends State<ProductPage> {
               ],
             ),
             const SizedBox(height: 24),
-            const Text(
-              'Descripción',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
-            ),
+            Text('Descripción', style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
-            const Text(
+            Text(
               'Deliciosas banderillas de salchicha empanizadas, crujientes y doradas. Perfectas para un snack o antojo callejero.',
-              style: TextStyle(color: Colors.black54),
+              style: theme.textTheme.bodyMedium,
             ),
           ],
         ),

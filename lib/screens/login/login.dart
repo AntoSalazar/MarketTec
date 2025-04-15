@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tecmarketplace/screens/register/email_verification_Screen.dart';
+import 'package:tecmarketplace/screens/home/home.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -21,93 +22,72 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+    final textColor = theme.textTheme.bodyMedium?.color;
+
     return Scaffold(
-      backgroundColor: const Color(0xFFFFFBF0), // Cream background
+      backgroundColor: isDark ? theme.scaffoldBackgroundColor : const Color(0xFFFFFBF0),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 20),
-
-
-
               const SizedBox(height: 60),
-
-              // Welcome text
-              const Text(
+              Text(
                 'MarketTec',
-                style: TextStyle(
+                style: theme.textTheme.displaySmall?.copyWith(
                   fontSize: 40,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF1A2B22),
+                  color: textColor,
                   height: 1.1,
                 ),
               ),
-
               const SizedBox(height: 16),
-
-              // Subtitle
-              const Text(
+              Text(
                 'Inicia sesión en tu cuenta',
-                style: TextStyle(
+                style: theme.textTheme.titleMedium?.copyWith(
                   fontSize: 20,
-                  color: Color(0xFF1A2B22),
+                  color: textColor,
                 ),
               ),
-
               const SizedBox(height: 60),
-
-              // Username field
               Container(
                 decoration: BoxDecoration(
-                  color: const Color(0xFFEFF1EC),
+                  color: isDark ? const Color(0xFF2C2C2C) : const Color(0xFFEFF1EC),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: TextField(
                   controller: _emailController,
+                  style: TextStyle(color: textColor),
                   decoration: InputDecoration(
-                    hintText: 'Nombre completo',
-                    hintStyle: TextStyle(
-                      color: Colors.black.withOpacity(0.5),
-                    ),
-                    prefixIcon: Icon(
-                      Icons.person_outline,
-                      color: Colors.black.withOpacity(0.7),
-                    ),
+                    hintText: 'Nombre de usuario o Correo',
+                    hintStyle: TextStyle(color: textColor?.withOpacity(0.5)),
+                    prefixIcon: Icon(Icons.person_outline, color: textColor?.withOpacity(0.7)),
                     border: InputBorder.none,
                     contentPadding: const EdgeInsets.symmetric(vertical: 16),
                   ),
                 ),
               ),
-
               const SizedBox(height: 16),
-
-              // Password field
               Container(
                 decoration: BoxDecoration(
-                  color: const Color(0xFFEFF1EC),
+                  color: isDark ? const Color(0xFF2C2C2C) : const Color(0xFFEFF1EC),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: TextField(
                   controller: _passwordController,
                   obscureText: _obscurePassword,
+                  style: TextStyle(color: textColor),
                   decoration: InputDecoration(
                     hintText: '•••••••',
-                    hintStyle: TextStyle(
-                      color: Colors.black.withOpacity(0.5),
-                    ),
-                    prefixIcon: Icon(
-                      Icons.lock_outline,
-                      color: Colors.black.withOpacity(0.7),
-                    ),
+                    hintStyle: TextStyle(color: textColor?.withOpacity(0.5)),
+                    prefixIcon: Icon(Icons.lock_outline, color: textColor?.withOpacity(0.7)),
                     suffixIcon: IconButton(
                       icon: Icon(
-                        _obscurePassword
-                            ? Icons.visibility_off_outlined
-                            : Icons.visibility_outlined,
-                        color: Colors.black.withOpacity(0.7),
+                        _obscurePassword ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                        color: textColor?.withOpacity(0.7),
                       ),
                       onPressed: () {
                         setState(() {
@@ -120,41 +100,33 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
-
               const SizedBox(height: 12),
-
-              // Forgot password
               Align(
                 alignment: Alignment.centerRight,
                 child: GestureDetector(
-                  onTap: () {
-                    // Handle forgot password
-                  },
-                  child: const Text(
+                  onTap: () {},
+                  child: Text(
                     '¿Olvidaste tu contraseña?',
-                    style: TextStyle(
-                      color: Color(0xFF1A2B22),
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      color: textColor,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                 ),
               ),
-
               const SizedBox(height: 40),
-
-              // Login button
               SizedBox(
                 width: double.infinity,
                 height: 56,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => const EmailVerificationScreen()),
+                      MaterialPageRoute(builder: (context) => const HomeScreen()),
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF2E6144), // Dark green
+                    backgroundColor: const Color(0xFF2E6144), // Color verde institucional
                     foregroundColor: Colors.white,
                     elevation: 0,
                     shape: RoundedRectangleBorder(
@@ -163,29 +135,22 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   child: const Text(
                     'Iniciar sesión',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
-
               const Spacer(),
-
-              // Register link
               Padding(
                 padding: const EdgeInsets.only(bottom: 32.0),
                 child: Center(
                   child: GestureDetector(
                     onTap: () {
-                      // Navigate to register screen
                       Navigator.of(context).pushReplacementNamed('/register');
                     },
-                    child: const Text(
+                    child: Text(
                       '¿No tienes una cuenta? Regístrate',
-                      style: TextStyle(
-                        color: Color(0xFF1A2B22),
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: textColor,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
