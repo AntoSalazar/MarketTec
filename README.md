@@ -94,7 +94,7 @@ Developed with ❤️ by students of the Instituto Tecnológico de Tuxtla Gutié
   📧 L2270011@tuxtla.tecnm.mx
 
 - 👨‍💻 **Joaquín Aguilar Hernández**  
-  📧 L@tuxtla.tecnm.mx
+  📧 L21270623@tuxtla.tecnm.mx
 
 - 👨‍💻 **Armando Hernández Hernández**  
   📧 L22270037@tuxtla.tecnm.mx
